@@ -1,0 +1,37 @@
+<div class="hidden flex-col bg-white dark:bg-neutral-900 shadow-md shadow-neutral-200 dark:shadow-neutral-800 rounded-sm z-10" *ngIf="currentUser" #menu
+    id="menu">
+    <div class="flex items-center w-60 py-3 px-4 gap-4 dark:hover:text-neutral-900 hover:bg-neutral-200 cursor-pointer
+        duration-100"
+        [routerLink]="['', 'user', currentUser.username]" (click)="closeMenu()">
+        <img class="w-10 h-10 rounded-full" [src]="currentUser.profile_image" style="min-width: 40px;" />
+        <div>
+            <p class="text-neutral-900 dark:text-white">{{currentUser.name}}</p>
+            <p class="text-xs text-neutral-400">@{{currentUser.username}}</p>
+        </div>
+    </div>
+    <div class="flex flex-col text-neutral-500 dark:text-neutral-400">
+        <div class="px-4 py-3 border-t border-neutral-400 
+            hover:text-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-600 dark:hover:text-white cursor-pointer duration-100" 
+        (click)="closeMenu()" [routerLink]="['', 'upload']">
+            <div class="flex items-center gap-4"><fa-icon [icon]="new" class="text-xl"></fa-icon>
+                <p>New article</p>
+            </div>
+        </div>
+        <div class="px-4 py-3 border-t border-neutral-400 
+            hover:text-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-600 dark:hover:text-white cursor-pointer duration-100">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-5">
+                    <fa-icon [icon]="moon" class="text-xl"></fa-icon>
+                    <p>Night mode</p>
+                </div>
+                <app-switch (change)="toggleDarkMode()"></app-switch>
+            </div>
+        </div>
+        <div class="px-4 py-3 border-t border-neutral-400 
+            hover:text-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-600 dark:hover:text-white cursor-pointer duration-100" (click)="logout($event)" (click)="closeMenu()">
+            <div class="flex items-center gap-4"><fa-icon [icon]="logoutIcon" class="text-xl"></fa-icon>
+                <p>Logout</p>
+            </div>
+        </div>
+    </div>
+</div>

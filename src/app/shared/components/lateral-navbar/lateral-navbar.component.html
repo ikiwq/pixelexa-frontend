@@ -1,0 +1,69 @@
+<div class="left-0 top-0 absolute w-full h-full bg-neutral-500 z-10 flex duration-300"
+    [ngClass]="menu_open ? 'flex bg-opacity-40' : 'flex bg-opacity-0 -z-20'" style="margin-top: 60px;">
+    <div class="w-80 h-full bg-white dark:bg-neutral-900 flex flex-col py-3 font-roboto duration-300 absolute"
+        [ngClass]="menu_open ? 'left-0' : ' -left-96'" id="lateral-menu">
+        <div class="flex-col" *ngIf="userModel; else auth_section">
+            <div class="flex gap-4 pb-2 px-3">
+                <div>
+                    <a [routerLink]="['', 'user', userModel.username]">
+                        <img class="w-16 h-16 rounded-full object-cover" [src]="userModel.profile_image" />
+                    </a>
+                </div>
+                <div class="font-thin">
+                    <a [routerLink]="['', 'user', userModel.username]">
+                        <h1 class="text-xl font-bold">{{userModel.name}}</h1>
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <h1>@{{userModel.username}}</h1>
+                        <div class="flex gap-1 text-sm text-neutral-700 dark:text-neutral-300"><fa-icon
+                                [icon]="star"></fa-icon>{{userModel.total_stars}} </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center pb-3 font-bold">
+                <div class="px-10 py-2 bg-blue-600 hover:bg-blue-500 duration-100 rounded-full cursor-pointer" (click)="logout()">
+                    <p class="text-white">Logout</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-b mx-3"></div>
+        <ng-template #auth_section>
+            <div class="flex justify-around items-center gap-4 py-3 px-4 text-white">
+                <div class="px-6 py-2 rounded-full bg-blue-500 cursor-pointer hover:bg-blue-600 duration-300"
+                    [routerLink]="['auth', 'login']">
+                    <p class="font-semibold">Login</p>
+                </div>
+                <div class="px-2 py-1 cursor-pointer duration-300 text-black dark:text-white hover:underline"
+                    [routerLink]="['auth', 'register']">
+                    <p class="font-semibold">Register</p>
+                </div>
+            </div>
+        </ng-template>
+        <form [formGroup]="searchFormGoup" (submit)="go_to_search()">
+            <div class="flex items-center px-3 py-3 relative">
+                <input placeholder="Search" formControlName="searchInput"
+                    class="py-2 border border-neutral-500 px-2 dark:bg-neutral-700 text-black dark:text-white input-text w-full" />
+                <button class="absolute right-5"><fa-icon [icon]="search"></fa-icon></button>
+            </div>
+        </form>
+        <div class="border-b mx-3"></div>
+        <div class="flex flex-col font-extrabold">
+            <tr *ngFor="let link of links">
+                <a [routerLink]="[link.link]">
+                    <div class="py-4 px-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 duration-100">
+                        <p>{{link.name}}</p>
+                    </div>
+                </a>
+            </tr>
+        </div>
+        <div class="flex flex-col font-extrabold">
+            <tr *ngFor="let category of categories">
+                <a [routerLink]="['', 'category', category.name]">
+                    <div class="py-4 px-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 duration-100">
+                        <p>{{category.name}}</p>
+                    </div>
+                </a>
+            </tr>
+        </div>
+    </div>
+</div>

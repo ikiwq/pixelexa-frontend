@@ -1,0 +1,17 @@
+<div class="w-full h-full flex justify-between items-center px-4 gap-6">
+    <div class="h-full w-full flex items-center justify-center py-3 relative">
+        <input id="input-search" class="input-text h-full w-full rounded-xl px-14 py-4 background-low-contrast" placeholder="Let your fantasy unleash"/>
+        <label for="input-search" class="input-search"></label>
+        <div class="absolute left-4 text-3xl text-neutral-200 cursor-pointer">
+            <fa-icon [icon]="search"></fa-icon>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="flex justify-center items-center px-4 py-3 background-low-contrast rounded-xl box-shadow-secondary">
+            <p class="text-secondary"><fa-icon [icon]="list"></fa-icon></p>
+        </div>
+        <div class="flex justify-center items-center px-4 py-3 bg-blue-600 rounded-xl box-shadow-secondary cursor-pointer" [routerLink]="['upload']">
+            <p class="text-white"><fa-icon [icon]="plus"></fa-icon></p>
+        </div>
+    </div>
+</div>

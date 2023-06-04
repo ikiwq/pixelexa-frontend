@@ -1,0 +1,39 @@
+<div class="w-full h-full flex flex-col justify-center items-center font-roboto">
+    <div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="w-96 flex flex-col px-4 gap-6 border-b high-contrast-border py-8">
+                <div class="w-full py-5">
+                    <h1 class="text-center font-bold text-5xl">Login</h1>
+                </div>
+                <div class="w-full flex flex-col justify-center items-center gap-4">
+                    <div class="w-full">
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-800 rounded-sm" placeholder="Username or password" formControlName="email" type="email"/>
+                    </div>
+                    <div class="w-full flex relative items-center justify-center">
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-800" placeholder="Password" formControlName="password" type="{{(passwordShown === false)?'password':'text'}}"/>
+                        <div class="flex justify-center items-center cursor-pointer px-1 absolute right-2" (click)="togglePassword()">
+                            <fa-icon [icon]="eye" class="text-2xl text-low-contrast" *ngIf="passwordShown"></fa-icon>
+                            <fa-icon [icon]="eyeSlash" class="text-2xl text-low-contrast" *ngIf="!passwordShown"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <button class="w-full py-4 bg-blue-600 text-white flex justify-center items-center px-20 rounded-2xl box-shadow-secondary cursor-pointer">
+                        <p class="font-semibold text-xl">Login</p>
+                    </button>
+                </div>
+                <div class="w-full bg-red-500 flex text-xl gap-2 px-2 py-2 items-center justify-center" *ngIf="errorMessage">
+                    <div>
+                        <fa-icon [icon]="warning"></fa-icon>
+                    </div>
+                    <p class="text-center font-semibold">{{errorMessage}}</p>
+                </div>
+            </div>
+        </form>
+        <div class="w-96 px-4 py-8">
+            <div class="bg-red-500 text-white h-14 w-full flex items-center justify-center rounded-md">
+                <p class="font-semibold text-xl">Log in with Google</p>
+            </div>
+        </div>
+    </div>
+</div>

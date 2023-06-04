@@ -1,0 +1,24 @@
+<div class="flex items-center justify-center w-full h-full">
+    <div class="flex flex-col max-w-5xl w-full h-full">
+        <div class="py-4 border-b">
+            <h1 class="text-4xl text-center font-bold">{{search.toUpperCase()}}</h1>
+        </div>
+        <div class="flex gap-4" *ngIf="recentIndexes.length > 0; else not_found">
+            <div class="w-full lg:w-2/3">
+                <app-vertical-article-view [articles]="allArticles"
+                    [articlesIndexes]="recentIndexes"></app-vertical-article-view>
+            </div>
+            <div class="border-r"></div>
+            <div class="hidden lg:flex flex-col lg:w-1/3">
+                <h1 class="font-roboto font-bold text-lg whitespace-pre-wrap pt-2">POPULAR IN {{search.toUpperCase()}}
+                </h1>
+                <app-article-view-widget [articles]="allArticles"
+                    [articleIndexes]="popularIndexes"></app-article-view-widget>
+            </div>
+        </div>
+        <app-pagination-observer (inView)="requestPage()"></app-pagination-observer>
+        <ng-template #not_found>
+            <h1 class="text-4xl text-center py-20 font-roboto font-bold">No article found for {{search}}</h1>
+        </ng-template>
+    </div>
+</div>

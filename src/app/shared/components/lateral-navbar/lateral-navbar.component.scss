@@ -1,0 +1,31 @@
+.lateral-background{
+    background: rgb(90,34,206);
+    background: linear-gradient(61deg, rgba(90,34,206,1) 21%, rgba(206,62,185,1) 45%, rgba(34,125,206,1) 85%);
+    backdrop-filter: blur(20px);      
+}
+
+.lateral-background::before{
+    position: absolute;
+    content: '';
+    background: inherit;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 0 3000px rgba(150, 150, 150, 0.192);
+    filter: blur(10px);
+    border-radius: 15px;
+}
+
+.section-blurred{
+    background: rgba(255, 255, 255, .2);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.section-blurred-hover{
+    transition: 300ms;
+    &:hover{
+        background: rgba(255, 255, 255, .2);
+        backdrop-filter: saturate(180%) blur(20px);
+    }
+}

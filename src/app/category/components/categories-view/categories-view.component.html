@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-2 font-serif">
+    <tr *ngFor="let category of categories">
+        <a [routerLink]="['', 'category', category.name]">
+            <div
+                class="flex flex-col px-2 py-1 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md">
+                <p class="w-60 overflow-hidden text-ellipsis text-lg">
+                    {{category.name}}</p>
+                <div class="font-roboto text-xs text-neutral-400">
+                    <p
+                        *ngIf="category.articles_last_7_days/7 > category.articles_last_day; else last_day">
+                        {{category.articles_last_7_days}} articles in the last 7 days</p>
+
+                    <ng-template #last_day>
+                        <p>{{category.articles_last_day}} articles in the
+                            last
+                            day</p>
+                    </ng-template>
+                </div>
+            </div>
+        </a>
+    </tr>
+</div>

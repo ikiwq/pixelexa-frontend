@@ -1,0 +1,12 @@
+<div class="w-full flex">
+    <form class="w-full flex items-center justify-center gap-1" [formGroup]="chatForm" (submit)="sendMessage($event)">
+        <input class="input-text h-full w-full px-2 rounded-2xl py-4 background-low-contrast"
+            placeholder="Write a message" [formControlName]="'chatTextController'"/>
+        <label for="input-search" class="input-search"></label>
+        <button
+            class="bg-blue-500 hover:bg-blue-600 duration-300 text-2xl text-neutral-200 cursor-pointer w-10 h-10 rounded-full flex items-center justify-center relative"
+            style="min-height: 48px; min-width: 48px;">
+            <fa-icon [icon]="send" class="absolute left-2.5"></fa-icon>
+        </button>
+    </form>
+</div>

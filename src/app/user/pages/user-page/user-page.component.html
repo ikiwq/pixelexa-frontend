@@ -1,0 +1,26 @@
+<div class="w-full h-full flex justify-center items-start">
+    <div class="w-full max-w-6xl flex flex-col px-2 xl:px-0">
+        <div class="py-6 border-b border-black dark:border-white" *ngIf="user">
+            <app-user-overview [user]="user"></app-user-overview>
+        </div>
+        <div class="flex w-full h-full gap-4" *ngIf="user">
+            <div class="flex flex-col w-full lg:w-2/3">
+                <h1 class="font-roboto font-bold text-lg py-2 pb-3">MOST RECENT FROM {{user.username.toUpperCase()}}</h1>
+                <app-vertical-article-view *ngIf="allIndexes[user.username.toUpperCase() + '-CREATED_AT']"
+                [articles]="allArticles"
+                [articlesIndexes]="allIndexes[user.username.toUpperCase() + '-CREATED_AT']"
+                class="-mt-6">
+                </app-vertical-article-view>
+                <app-pagination-observer (inView)="requestPage()"></app-pagination-observer>
+            </div>
+            <div class="hidden lg:block border-r"></div>
+            <div class="hidden lg:flex flex-col lg:w-1/3">
+                <h1 class="font-roboto font-bold text-sm py-2">MOST POPULAR FROM {{user.username.toUpperCase()}}</h1>
+                <app-article-view-widget *ngIf="allIndexes[user.username.toUpperCase() + '-POPULAR']"
+                [highlightFirst]="true"
+                [articles]="allArticles"
+                [articleIndexes]="allIndexes[user.username.toUpperCase() + '-POPULAR'].slice(0, 6)"></app-article-view-widget>
+            </div>
+        </div>
+    </div>
+</div>

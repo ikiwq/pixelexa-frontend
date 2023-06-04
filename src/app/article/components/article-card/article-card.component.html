@@ -1,0 +1,18 @@
+<div class="flex py-4 border-b">
+    <div class="flex flex-col w-3/4">
+        <a [routerLink]="['' , 'article', article?.id]">
+            <h1 class="text-xl font-bold hover:underline cursor-pointer">{{article?.title}}</h1>
+        </a>
+        <p class="font-roboto font-light py-2 line-clamp-3 h-20">{{article?.excerpt}}</p>
+        <div>
+            <p class="font-roboto font-light text-sm text-neutral-500">By
+                <span class="hover:underline hover:text-sky-500 cursor-pointer">{{article?.creator?.username}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="w-1/4">
+        <a [routerLink]="['' , 'article', article?.id]">
+            <img class="cursor-pointer" [src]="article?.image" />
+        </a>
+    </div>
+</div>

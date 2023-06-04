@@ -1,0 +1,16 @@
+<div class="w-full flex py-3 font-roboto" *ngIf="currentUser">
+    <form class="w-full flex items-center justify-center gap-3" [formGroup]="commentForm" (submit)="sendComment($event)">
+        <div class="w-12 h-12">
+            <img class="w-12 h-12 content-center rounded-full" style="min-width: 48px; min-height:48px" [src]="currentUser.profile_image"/>
+        </div>
+        <div class="w-full">
+            <input class="input-text h-full w-full px-1.5 rounded-sm py-3 bg-neutral-100 dark:bg-neutral-800"
+                placeholder="Write a message" [formControlName]="'message'"/>
+        </div>
+        <button
+            class="bg-blue-500 hover:bg-blue-600 duration-300 text-2xl text-white cursor-pointer w-10 h-10 rounded-full flex items-center justify-center relative"
+            style="min-height: 40px; min-width: 40px;">
+            <fa-icon [icon]="send" class="absolute left-1.5"></fa-icon>
+        </button>
+    </form>
+</div>

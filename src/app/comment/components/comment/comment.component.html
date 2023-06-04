@@ -1,0 +1,42 @@
+<div class="w-full flex flex-col py-4 border-b font-roboto">
+    <div class="flex justify-start items-center gap-3" *ngIf="comment.user">
+        <div class="w-8 h-8">
+            <img class="w-8 h-8 rounded-full cursor-pointer" [src]="comment.user.profile_image"
+                [routerLink]="['', 'user', comment.user.username]" />
+        </div>
+        <div>
+            <p class="text-sm cursor-pointer hover:underline" [routerLink]="['', 'user', comment.user.username]">
+                {{comment.user.username}}</p>
+        </div>
+        <div class="text-sm flex items-center justify-start gap-1 text-neutral-500">
+            <fa-icon [icon]="star"></fa-icon>
+            <p>
+                {{comment.user.total_stars}}
+            </p>
+        </div>
+        <div>
+            <p class="text-sm text-neutral-500">{{comment.created_at | dateAgo}}</p>
+        </div>
+    </div>
+    <p class="pl-11 break-words whitespace-pre-line">{{comment.text}}</p>
+    <div class="px-9 flex text-sm gap-2 pb-1 pt-2">
+        <div class="flex">
+            <div [ngClass]="comment.upvoted ? 'text-green-500 hover:text-green-600' : ''"
+                class="hover:text-green-500 duration-100 cursor-pointer px-2" (click)="upvoteComment()">
+                <fa-icon [icon]="arrowUp"></fa-icon>
+            </div>
+            <p>{{comment.votes_count}}</p>
+            <div [ngClass]="comment.downvoted ? 'text-red-500 hover:text-red-600' : ''"
+                class="hover:text-red-500 cursor-pointer px-2" (click)="downvoteComment()">
+                <fa-icon [icon]="arrowDown"></fa-icon>
+            </div>
+        </div>
+        <div class="hover:text-orange-500 cursor-pointer px-2">
+            <fa-icon [icon]="danger"></fa-icon>
+        </div>
+        <div class="hover:text-red-500 cursor-pointer px-2" *ngIf="currentUser && currentUser.id == comment.user?.id"
+            (click)="deleteItem()">
+            <fa-icon [icon]="trash"></fa-icon>
+        </div>
+    </div>
+</div>

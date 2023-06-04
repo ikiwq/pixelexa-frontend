@@ -1,0 +1,38 @@
+<div
+    class="w-full h-full flex items-center justify-center border-b border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-900 font-roboto">
+    <div class="flex items-center justify-between h-full w-full px-4">
+        <div class="flex items-center justify-center gap-2">
+            <div>
+                <fa-icon class="text-xl cursor-pointer hover:text-neutral-500 duration-100" [icon]="bars" id="lateral-menu-button"></fa-icon>
+            </div>
+            <p class="hidden lg:block text-3xl font-bold cursor-pointer" [routerLink]="['/']">Pixelexa</p>
+        </div>
+        <div class="flex justify-center items-center gap-4 text-white" *ngIf="currentUser; else auth">
+            <div class="flex gap-2 items-center justify-center">
+                <div class="px-4 py-2 rounded-full bg-blue-600 cursor-pointer hover:bg-blue-500 duration-300 font-sans font-semibold"
+                    [routerLink]="['upload']">
+                    <p>New article</p>
+                </div>
+            </div>
+            <div class="relative z-10">
+                <img [src]="currentUser.profile_image" class="rounded-full w-8 h-8 cursor-pointer"
+                    (click)="toggleMenu()" #profilePic />
+                <div class="absolute top-10 right-1" #menuDiv>
+                    <app-navbar-menu [shownObservable]="menuShown"></app-navbar-menu>
+                </div>
+            </div>
+        </div>
+        <ng-template #auth>
+            <div class="flex justify-center items-center gap-4 text-white">
+                <div class="px-6 py-2 rounded-full bg-blue-500 cursor-pointer hover:bg-blue-600 duration-300"
+                    [routerLink]="['auth', 'login']">
+                    <p class="font-semibold">Login</p>
+                </div>
+                <div class="px-2 py-1 cursor-pointer duration-300 text-black dark:text-white hover:underline"
+                    [routerLink]="['auth', 'register']">
+                    <p class="font-semibold">Register</p>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

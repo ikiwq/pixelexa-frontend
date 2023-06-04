@@ -1,0 +1,49 @@
+<div class="flex flex-col gap-1">
+    <div>
+        <div class="flex flex-col py-2.5 gap-2 cursor-pointer border-b border-neutral-700"
+            [routerLink]="['', 'article', articles[main_article_index].id]"
+            *ngIf="highlightFirst && main_article_index && articles[main_article_index]">
+            <div class="w-full max-h-72">
+                <img class="w-full h-72 object-cover" [src]="articles[main_article_index].image" />
+            </div>
+            <div class="flex flex-col relative w-full">
+                <a [routerLink]="['','article', articles[main_article_index].id]">
+                    <h1 class="font-serif cursor-pointer hover:underline text-xl font-medium line-clamp-3"
+                        style="line-height: 1.2;">{{articles[ main_article_index].title}}</h1>
+                </a>
+                <p class="text-sm line-clamp-3 py-1 font-thin font-roboto font-sm" *ngIf="extend">
+                    {{articles[ main_article_index].excerpt}}
+                </p>
+                <p class="text-sm font-roboto font-light text-neutral-500">By <span [routerLink]=""
+                        class="hover:underline hover:text-sky-500 duration-100">{{articles[
+                        main_article_index].creator?.username}}</span>
+                </p>
+            </div>
+        </div>
+        <div *ngIf="article_indexes && article_indexes.length > 0">
+            <tr *ngFor="let articleIndex of article_indexes">
+                <div class="flex py-2.5 gap-2 cursor-pointer border-b border-neutral-700"
+                    [routerLink]="['', 'article', articles[articleIndex].id]" *ngIf="articles[articleIndex].creator">
+                    <div class="flex flex-col relative w-full">
+                        <a [routerLink]="['','article', articles[articleIndex].id]">
+                            <h1 class="font-serif cursor-pointer hover:underline text-lg font-medium line-clamp-3"
+                                style="line-height: 1.2;">{{articles[articleIndex].title}}</h1>
+                        </a>
+                        <p class="text-sm line-clamp-3 py-1 font-thin font-roboto font-sm" *ngIf="extend">
+                            {{articles[articleIndex].excerpt}}
+                        </p>
+                        <p class="text-sm font-roboto font-light text-neutral-500">By <a
+                                [routerLink]="['', 'user', articles[articleIndex].creator?.username]"><span
+                                    class="hover:underline hover:text-sky-500 duration-100">{{articles[articleIndex].creator?.username}}</span></a>
+                        </p>
+                    </div>
+                    <div class="w-16 h-16">
+                        <a [routerLink]="['','article', articles[articleIndex].id]">
+                            <img class="w-16 h-16 object-cover" [src]="articles[articleIndex].image"
+                                style="min-width: 64px;" />
+                        </a>
+                    </div>
+                </div>
+            </tr>
+        </div>
+    </div>

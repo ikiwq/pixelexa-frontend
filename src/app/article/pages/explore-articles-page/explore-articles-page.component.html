@@ -1,0 +1,48 @@
+<div class="w-full h-full px-2">
+    <div class="relative flex flex-col">
+        <div class="flex gap-4">
+            <div class="flex flex-col w-full xl:w-4/5">
+                <app-article-main-view *ngIf="staticArticlesId['first-row'].length > 0" [articles]="allArticles"
+                    [articlesIndexes]="staticArticlesId['first-row']"></app-article-main-view>
+                <app-vertical-article-view-xl *ngIf="staticArticlesId['second-row'].length > 0; else loading" [articles]="allArticles"
+                    [articlesIndexes]="staticArticlesId['second-row']"></app-vertical-article-view-xl>
+                <ng-template #loading>
+                    <app-loading class="py-20" *ngIf="loading"></app-loading>
+                </ng-template>
+            </div>
+            <div class="hidden w-1/5 xl:flex flex-col h-96">
+                <div class="flex flex-col py-2">
+                    <h1 class="text-xl font-bold font-roboto">Popular categories</h1>
+                    <app-categories-view *ngIf="categories && categories.length > 0; else loadingCategories" [categories]="categories"></app-categories-view>
+                    <ng-template #loadingCategories>
+                        <app-loading></app-loading>
+                    </ng-template>
+                </div>
+                <div class="border-t border-neutral-400"></div>
+                <div class="flex flex-col">
+                    <h1 class="text-xl font-bold font-roboto pt-1">Recent articles</h1>
+                    <app-article-view-widget *ngIf="staticArticlesId['RECENT']; else loadingArticles" [articles]="allArticles"
+                        [articleIndexes]="staticArticlesId['RECENT']"></app-article-view-widget>
+                    <ng-template #loadingArticles>
+                        <app-loading></app-loading>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <tr *ngFor="let item of generatedArticlesId | keyvalue; let i = index" class="flex flex-col">
+                <div *ngIf="categories && categories[i].name && allIndexes[categories[i].name.toUpperCase() + '-POPULAR']"
+                    class="border-t flex flex-col">
+                    <h1 class="text-lg font-bold font-roboto pt-2 -mb-2">{{categories[i].name.toUpperCase()}}</h1>
+                    <app-horizontal-article-view [articles]="allArticles"
+                        [articlesIndexes]="allIndexes[categories[i].name.toUpperCase() + '-POPULAR']"
+                        [highlightFirst]="i % 2 == 0"></app-horizontal-article-view>
+                </div>
+                <app-vertical-article-view-xl [articles]="allArticles"
+                    [articlesIndexes]="generatedArticlesId[item.key]"></app-vertical-article-view-xl>
+            </tr>
+        </div>
+        <!--<app-pagination-observer (inView)="requestPage()"
+            class="absolute w-full h-1 bottom-0"></app-pagination-observer>-->
+    </div>
+</div>

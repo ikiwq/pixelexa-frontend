@@ -1,0 +1,21 @@
+<div class="flex gap-8" *ngIf="user">
+    <div class="w-32 h-32">
+        <img class="w-32 h-32 rounded-full" [src]="user.profile_image" style="min-width: 128px;"/>
+    </div>
+    <div class="flex flex-col gap-1">
+        <div>
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-semibold">{{user.name}}</h1>
+            <div class="flex items-center font-roboto font-light">
+                <h2 class="text-lg text-neutral-400">@{{user.username}}</h2>
+                <div class="flex items-center justify-center gap-2 text-neutral-200">
+                    <fa-icon class="text-md" [icon]="star"></fa-icon>
+                    <div class="text-md">{{user.total_stars}}</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p *ngIf="user.biography">{{user.biography}}</p>
+            <p class="font-roboto font-light text-lg">This user has no biography yet.</p>
+        </div>
+    </div>
+</div>

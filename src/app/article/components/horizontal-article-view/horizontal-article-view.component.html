@@ -1,0 +1,62 @@
+<div class="flex gap-2 justify-around py-4 light:border-black dark:border-white"
+    [ngClass]="highlightFirst && 'flex-col lg:flex-row'" *ngIf="articlesIndexes.length > 0">
+    <div class="w-full lg:w-8/12 flex flex-col pr-3" *ngIf="highlightFirst">
+        <div class="w-full pb-2">
+            <a [routerLink]="['', 'article', articles[articlesIndexes[0]].id]">
+                <img class="w-full" [src]="articles[articlesIndexes[0]].image" />
+            </a>
+        </div>
+        <div class="flex flex-col gap-2">
+            <a [routerLink]="['', 'article', articles[articlesIndexes[0]].id]">
+                <h1 class="text-4xl hover:underline pb-0.5">{{articles[articlesIndexes[0]].title}}</h1>
+            </a>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8">
+                    <img class="w-8 h-8 rounded-full" [src]="articles[articlesIndexes[0]].creator?.profile_image" />
+                </div>
+                <p class="font-roboto font-light text-neutral-500">By <a [routerLink]="['', 'user', articles[articlesIndexes[0]].creator?.username]"><span
+                        class="hover:underline hover:text-blue-500">{{articles[articlesIndexes[0]].creator?.username}}</span></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="border-t light:border-black dark:border-white" *ngIf="highlightFirst"></div>
+    <div class="flex lg:flex-col w-full lg:w-4/12 gap-4 items-center" *ngIf="highlightFirst">
+        <tr class="w-1/2 lg:w-full" *ngFor="let articleIndex of articlesIndexes.slice(1, 3)">
+            <div class="flex flex-col">
+                <div>
+                    <a [routerLink]="['', 'article', articles[articleIndex].id]">
+                        <img class="cursor-pointer h-36 md:h-56 w-full object-cover"
+                            [src]="articles[articleIndex].image" />
+                    </a>
+                </div>
+                <a [routerLink]="['', 'article', articles[articleIndex].id]">
+                    <h1 class="text-lg hover:underline cursor-pointer line-clamp-3">{{articles[articleIndex].title}}
+                    </h1>
+                </a>
+                <p class="font-roboto font-lights text-sm text-neutral-500">By <span
+                        class="hover:underline hover:text-sky-600 cursor-pointer">{{articles[articleIndex].creator?.username}}</span>
+                </p>
+            </div>
+        </tr>
+    </div>
+    <div class="flex flex-col md:flex-row w-full gap-4 items-center" *ngIf="!highlightFirst">
+        <tr *ngFor="let articleIndex of articlesIndexes.slice(0, articlesInRow)">
+            <div class="flex flex-col">
+                <div>
+                    <a [routerLink]="['', 'article', articles[articleIndex].id]">
+                        <img class="cursor-pointer w-full h-56 md:h-40 object-cover"
+                            [src]="articles[articleIndex].image" />
+                    </a>
+                </div>
+                <a [routerLink]="['', 'article', articles[articleIndex].id]">
+                    <h1 class="text-lg hover:underline cursor-pointer line-clamp-3">{{articles[articleIndex].title}}
+                    </h1>
+                </a>
+                <p class="font-roboto font-lights text-sm text-neutral-500">By <span
+                        class="hover:underline hover:text-sky-600 cursor-pointer">{{articles[articleIndex].creator?.username}}</span>
+                </p>
+            </div>
+        </tr>
+    </div>
+</div>

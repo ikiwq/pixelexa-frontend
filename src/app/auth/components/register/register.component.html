@@ -1,0 +1,78 @@
+<div class="w-full h-full flex flex-col justify-center items-center font-roboto">
+    <div class="w-full">
+        <h1 class="text-center font-bold text-5xl">Register</h1>
+    </div>
+    <div *ngIf="step == 0">
+        <form [formGroup]="registerForm1" (ngSubmit)="nextForm()">
+            <div class="w-96 flex flex-col px-4 gap-6 border-b high-contrast-border py-8">
+                <div class="w-full flex flex-col justify-center items-center gap-4">
+                    <div class="w-full relative">
+                        <p class="w-full absolute -top-6 text-red-500" *ngIf="registerForm1.controls.name.invalid && registerForm1.controls.name.touched">Please insert a valid name.</p>
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-900" placeholder="Name" formControlName="name" type="text" [ngClass]="registerForm1.controls.name.invalid && registerForm1.controls.name.touched ? 'border-2 border-red-500' : ''"/>
+                    </div>
+                    <div class="w-full relative py-2">
+                        <p class="w-full absolute -top-4 text-red-500" *ngIf="registerForm1.controls.email.invalid && registerForm1.controls.email.touched">Please insert a valid email.</p>
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-900" placeholder="Email" formControlName="email" type="email" [ngClass]="registerForm1.controls.email.invalid && registerForm1.controls.email.touched ? 'border-2 border-red-500' : ''"/>
+                    </div>
+                    <div class="w-full flex relative items-center justify-center">
+                        <p class="w-full absolute -top-6 text-red-500" *ngIf="registerForm1.controls.password.invalid && registerForm1.controls.password.touched">Please insert a valid email.</p>
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-900" placeholder="Password" formControlName="password" type="{{(passwordShown === false)?'password':'text'}}"/>
+                        <div class="flex justify-center items-center cursor-pointer px-1 absolute right-2" (click)="togglePassword()">
+                            <fa-icon [icon]="eye" class="text-2xl text-low-contrast" *ngIf="passwordShown"></fa-icon>
+                            <fa-icon [icon]="eyeSlash" class="text-2xl text-low-contrast" *ngIf="!passwordShown"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <button class="w-full py-4 bg-blue-600 text-white flex justify-center items-center px-20 rounded-2xl box-shadow-secondary cursor-pointer">
+                        <p class="font-semibold text-xl">Next</p>
+                    </button>
+                </div>
+                <div class="w-full bg-red-500 flex text-xl gap-2 px-2 py-2 items-center justify-center" *ngIf="errorMessage">
+                    <div>
+                        <fa-icon [icon]="warning"></fa-icon>
+                    </div>
+                    <p class="text-center font-semibold">{{errorMessage}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="step == 1">
+        <form [formGroup]="registerForm2" (ngSubmit)="register()">
+            <div class="w-96 flex flex-col px-4 gap-6 border-b high-contrast-border py-8">
+                <div class="flex items-center justify-center">
+                    <input id="pfp-upload" type="file" class="hidden bg-neutral-100 dark:bg-neutral-900" (change)="onFileChanged($event)" />
+                    <label for="pfp-upload"
+                        [style.backgroundImage]="selectedImage ? 'url('+ selectedImage +')' : 'url(' + defaultImage + ')'"
+                        [style.background-size]="'cover'"
+                        class="bg-black w-32 h-32 rounded-full cursor-pointer hover:opacity-80 duration-300">
+                     </label>
+                </div>
+                <div class="w-full flex flex-col justify-center items-center gap-4">
+                    <div class="w-full">
+                        <input class="w-full text-input py-4 px-2 bg-neutral-100 dark:bg-neutral-900" placeholder="Username" formControlName="username" type="text"/>
+                    </div>
+                </div>
+                <div class="pt-2 flex gap-2">
+                    <div class="w-full py-4 bg-blue-600 text-white flex justify-center items-center rounded-2xl box-shadow-secondary cursor-pointer" (click)="goBack()">
+                        <p class="font-semibold text-xl">Back</p>
+                    </div>
+                    <button class="w-full py-4 bg-blue-600 text-white flex justify-center items-center rounded-2xl box-shadow-secondary cursor-pointer">
+                        <p class="font-semibold text-xl">Register</p>
+                    </button>
+                </div>
+                <div class="w-full bg-red-500 flex text-xl gap-2 px-2 py-2 items-center justify-center" *ngIf="errorMessage">
+                    <div>
+                        <fa-icon [icon]="warning"></fa-icon>
+                    </div>
+                    <p class="text-center font-semibold">{{errorMessage}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="w-96 px-4 py-8">
+        <div class="bg-red-500 text-white h-14 w-full flex items-center justify-center rounded-md gap-4">
+            <fa-icon [icon]="google" class="text-2xl"></fa-icon><p class="font-semibold text-xl">Register with Google</p>
+        </div>
+    </div>
+</div>
