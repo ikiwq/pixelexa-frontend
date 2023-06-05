@@ -1,27 +1,85 @@
 # Pixelexa
+## Introduction
+Pixelexa is an open-source online newspaper inspired by the Washington Post. It was meant to give the users an opportunity to publish articles of all kinds without the need to be an actual reporter.
+The user can interact with the articles: read them, star them, comment on them, and filter them by a specific text or by a category.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
+#### Source code
+This is the frontend repository, and the backend repository can be found [here](https://github.com/ikiwq/pixelexa-backend).
 
-## Development server
+### Screenshots
+#### Homepage
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<picture>
+  <source srcset="https://i.imgur.com/AMxBnTU.png">
+  <img alt="Homepage.">
+</picture>
 
-## Code scaffolding
+#### Profile page
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<picture>
+  <source srcset="https://i.imgur.com/IbeGHRg.png">
+  <img alt="Profile Page.">
+</picture>
 
-## Build
+#### Category Page
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<picture>
+  <source srcset="https://i.imgur.com/oSOXbqg.png">
+  <img alt="Profile Page.">
+</picture>
 
-## Running unit tests
+#### Dark Mode Homepage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<picture>
+  <source srcset="https://i.imgur.com/Db849Hr.png">
+  <img alt="Profile Page.">
+</picture>
 
-## Running end-to-end tests
+#### Built with
+[![My Skills](https://skillicons.dev/icons?i=angular,typescript,nodejs&theme=light)](https://skillicons.dev)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Getting started
+### Clone the repository
+Clone the repository with
+ 
+    git clone https://github.com/ikiwq/new-annex-frontend/
+    
+### Prerequisites:
+Before running the application, make sure to have all the dependencies installed (Angular and FortAwesome).
+    
+To install Angular:
 
-## Further help
+    npm install -g @angular/cli
+    
+To install fortawesome
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    npm install @fortawesome/fontawesome-svg-core
+    npm install @fortawesome/free-regular-svg-icons
+    npm install @fortawesome/free-solid-svg-icons
+    npm install @fortawesome/angular-fontawesome
+    
+### Configuration
+In the src/enviroments folder, you'll find two files with the environmental variables. Both contain an apiURL link that points to the API server.
+If you are using a different IP or port to host the API, modify the file like this:
+
+    export const environment = {
+      production: false,
+      apiURL: "http://new_url:new_port"
+    };
+   
+## License
+Distributed under the MIT License.
+
+## In depth into the code
+Pixelexa follows a particular type of structure when it comes to handling data (just like [Annex](https://github.com/ikiwq/new-annex-frontend)). Since every article has an id and a specific article can be present across multiple pages, the article service has a behavior subject containing all the articles, organized into a map.
+
+    articleStorage = new BehaviorSubject<ArticleDictionary>({});
+A key (in this case, the id) points to a specific Article.
+
+    export interface ArticleDictionary {
+      [key : string] : ArticleModel;
+    }
+    
+
+Then, the article components have access to the article storage and render articles based on an array of ids. Since the article storage is a map, the time complexity to get the article is O(1) instead of O(n), where n is the number of articles currently stored.
+  
